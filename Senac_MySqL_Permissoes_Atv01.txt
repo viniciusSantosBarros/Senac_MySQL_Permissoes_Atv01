@@ -1,0 +1,140 @@
+/*CREATE DATABASE Senac_atividade_01;
+
+USE Senac_atividade_01*/
+
+/*CREATE TABLE usuario (
+id_usuario INT NOT NULL AUTO_INCREMENT,
+login VARCHAR(100) NOT NULL,
+senha VARCHAR(100) NOT NULL,
+ultimo_login DATETIME NOT NULL,
+PRIMARY KEY(id_usuario)
+);
+
+SELECT * FROM usuario;*/
+
+
+/*CREATE TABLE cargo (
+id_cargo INT NOT NULL AUTO_INCREMENT,
+descricao VARCHAR(45) NOT NULL,
+salario DECIMAL (9,2) NOT NULL,
+comissao FLOAT NOT NULL,
+PRIMARY KEY (id_cargo)
+);
+
+SELECT * FROM cargo;*/
+
+
+/*CREATE TABLE funcionario (
+id_funcionario INT NOT NULL AUTO_INCREMENT,
+nome VARCHAR(45) NOT NULL,
+telefone VARCHAR (45) NOT NULL,
+cpf VARCHAR(11) NOT NULL,
+id_usuario INT NOT NULL,
+FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario),
+id_cargo INT NOT NULL,
+FOREIGN KEY (id_cargo) REFERENCES cargo (id_cargo),
+PRIMARY KEY (id_funcionario)
+);
+
+SELECT * FROM funcionario;*/
+
+
+/*CREATE TABLE cliente (
+id_cliente INT NOT NULL AUTO_INCREMENT,
+nome VARCHAR(255) NOT NULL,
+cpf VARCHAR(11) NOT NULL,
+endereco VARCHAR(255) NOT NULL,
+telefone VARCHAR(45) NOT NULL,
+PRIMARY KEY (id_cliente)
+);
+
+SELECT * FROM cliente;*/
+
+
+/*CREATE TABLE produto (
+id_produto INT NOT NULL AUTO_INCREMENT,
+nome VARCHAR(255) NOT NULL,
+descricao VARCHAR(255) NOT NULL,
+estoque INT NOT NULL,
+fabricante VARCHAR(255) NOT NULL,
+PRIMARY KEY (id_produto)
+);
+
+SELECT * FROM produto;*/
+
+
+/*CREATE TABLE venda (
+id_venda INT NOT NULL AUTO_INCREMENT,
+data DATETIME NOT NULL,
+data_envio DATETIME NOT NULL,
+status VARCHAR(45) NOT NULL,
+valor_total DECIMAL(9,2) NOT NULL,
+id_cliente INT NOT NULL,
+FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente),
+id_funcionario INT NOT NULL,
+FOREIGN KEY (id_funcionario) REFERENCES funcionario (id_funcionario),
+tipo_pagamento CHAR(1) NOT NULL,
+numero_cartao_pagamento VARCHAR(16) NOT NULL,
+numero_parcelas_pagamento INT NOT NULL,
+data_pagamento DATETIME NOT NULL,
+PRIMARY KEY (id_venda)
+);
+
+SELECT * FROM venda;*/
+
+
+/*CREATE TABLE item_venda (
+quantidade INT NOT NULL,
+valor_unitario DECIMAL(9,2) NOT NULL,
+subtotal DECIMAL(9,2) NOT NULL,
+nome_produto VARCHAR(255) NOT NULL,
+id_venda INT NOT NULL,
+FOREIGN KEY (id_venda) REFERENCES venda (id_venda),
+id_produto INT NOT NULL,
+FOREIGN KEY (id_produto) REFERENCES produto (id_produto)
+);
+
+SELECT * FROM item_venda;*/
+
+
+/*EXERCICIO 01 - Crie um usuário específico para relatórios. Crie role para ele, com acesso apenas à consulta em tabelas (nem dados, nem estrutura podem ser alterados).*/
+
+/*SELECT user FROM mysql.user;
+
+CREATE USER 'usuario@localhost' IDENTIFIED BY '1234';
+
+CREATE ROLE 'consulta_relatorios';
+
+GRANT SELECT ON senac_atividade_01.* TO 'consulta_relatorios';
+
+GRANT 'consulta_relatorios' TO 'usuario@localhost';
+
+SHOW GRANTS FOR 'usuario@localhost';*/
+
+
+/*EXERCICIO 02 - Crie usuário e role para funcionário, o qual pode manipular as tabelas de venda, cliente e produto, mas não deve ter acesso (nem para consulta) a funcionário e cargo e não deve ser capaz de realizar alterações de estrutura em nenhuma tabela.*/
+
+/*CREATE USER 'funcionario@localhost' IDENTIFIED BY '5678';
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON senac_atividade_01.venda TO 'funcionario@localhost';
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON senac_atividade_01.cliente TO 'funcionario@localhost';
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON senac_atividade_01.produto TO 'funcionario@localhost';
+
+CREATE ROLE 'acesso_funcionario';
+
+GRANT SELECT, CREATE, INSERT, UPDATE, DELETE ON senac_atividade_01.* TO 'acesso_funcionario';
+
+GRANT 'acesso_funcionario' TO 'funcionario@localhost'; */
+
+
+/*EXERCICIO 03 - Escolha um método de criptografia ou hash para aplicar às senhas dos usuários. Atualize a tabela “usuário” aplicando a criptografia ou hash ao campo de senha em todos os registros.*/
+
+/*INSERT INTO usuario (id_usuario, login, senha, ultimo_login)
+VALUES (1, 'Ana.silva@hotmail.com', sha1('1234'), '2022-01-03'),
+	   (2, 'Carlos.eduardo@hotmail.com', sha1('carlos2020'), '2022-09-09'),
+       (3, 'Danilo.Silvero@gmail.com', sha1('Danilo1998'), '2022-11-01'),
+       (4, 'Beatriz.Silva@gmail.com', md5('Beatriz2022'), '2022-04-23'),
+       (5, 'Luiz.Otavio@gmail.com', md5('Luiz.ot2022'), '2022-01-03'),
+       (6, 'Camila.Nogueira@hotmail.com', sha1('CamilaNogue1999'), '2022-04-05');*/
